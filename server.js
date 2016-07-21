@@ -1,6 +1,7 @@
 'use strict';
 
 const Hapi = require('hapi');
+const Good = require('good');
 
 // create server host and port
 const server = new Hapi.Server();
@@ -8,19 +9,6 @@ const server = new Hapi.Server();
 server.connection({
   host: 'localhost',
   port: 3000
-});
-
-// register inert plug-in
-server.register(require('inert'), (err) => {
-  if (err) throw err;
-
-  server.route({
-    method: 'GET',
-    path: '/hello',
-    handler: (request, reply) => {
-      reply.file('./public/hello.html');
-    }
-  });
 });
 
 // add route
@@ -36,10 +24,49 @@ server.route({
   handler: (request, reply) => {
     reply(`Hello ${encodeURIComponent(request.params.name)}!`)
   }
-})
-// start server
-server.start(err => {
-  if (err) throw err;
-  console.log('Server running at: ', server.info.uri);
 });
+
+// register inert plug-in
+server.register(require('inert'), (err) => {
+  if (err) throw err;
+
+  server.route({
+    method: 'GET',
+    path: '/hello',
+    handler: (request, reply) => {
+      reply.file('./public/hello.html');
+    }
+  });
+});
+
+// register good plugin
+server.register({
+  register: Good,
+  options: {
+    reporters: {
+      console: [
+      {
+        module: 'good-squeeze',
+        name: 'Squeeze',
+        args: [{
+          response: '*',
+          log: '*'
+        }]
+      },
+      {
+        module: 'good-console'
+      }, 'stdout']
+    }
+  }
+}, (err) => {
+  if (err) throw err;
+
+  // start server
+  server.start(err => {
+    if (err) throw err;
+    console.log('Server running at: ', server.info.uri);
+  });
+});
+
+
 
