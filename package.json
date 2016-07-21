@@ -17,6 +17,9 @@
   },
   "homepage": "https://github.com/mikeulvila/hapi_playground#readme",
   "dependencies": {
+    "good": "^7.0.1",
+    "good-console": "^6.1.2",
+    "good-squeeze": "^4.0.0",
     "hapi": "^13.5.0",
     "inert": "^4.0.1"
   }
