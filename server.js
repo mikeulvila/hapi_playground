@@ -20,7 +20,7 @@ server.route({
 
 server.route({
   method: 'GET',
-  path: '/{name}',
+  path: '/{name?}',  // put ? at end of parameter to make it optional
   handler: (request, reply) => {
     reply(`Hello ${encodeURIComponent(request.params.name)}!`)
   }
@@ -39,7 +39,7 @@ server.register(require('inert'), (err) => {
   });
 });
 
-// register good plugin
+// register good plugin for logging and start server within callback
 server.register({
   register: Good,
   options: {
