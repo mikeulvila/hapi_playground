@@ -10,10 +10,23 @@ server.connection({
   port: 3000
 });
 
+// register inert plug-in
+server.register(require('inert'), (err) => {
+  if (err) throw err;
+
+  server.route({
+    method: 'GET',
+    path: '/hello',
+    handler: (request, reply) => {
+      reply.file('./public/hello.html');
+    }
+  });
+});
+
 // add route
 server.route({
   method: 'GET',
-  path: '/hello',
+  path: '/',
   handler: (request, reply) => reply('Hello World!')
 });
 

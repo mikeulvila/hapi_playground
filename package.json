@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/mikeulvila/hapi_playground#readme",
   "dependencies": {
-    "hapi": "^13.5.0"
+    "hapi": "^13.5.0",
+    "inert": "^4.0.1"
   }
 }
