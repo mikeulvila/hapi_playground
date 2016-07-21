@@ -1,0 +1,22 @@
+{
+  "name": "hapi_playground",
+  "version": "1.0.0",
+  "description": "playground to learn hapi.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mikeulvila/hapi_playground.git"
+  },
+  "author": "Mike Ulvila <mikeulvila@me.com> (https://github.com/mikeulvila)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mikeulvila/hapi_playground/issues"
+  },
+  "homepage": "https://github.com/mikeulvila/hapi_playground#readme",
+  "dependencies": {
+    "hapi": "^13.5.0"
+  }
+}
