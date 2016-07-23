@@ -18,11 +18,15 @@ server.route({
   handler: (request, reply) => reply('Hello World!')
 });
 
+// you can also allow parameters that match multiple segments.
+// In order to do this, we use an asterisk and a number. For example:
 server.route({
   method: 'GET',
-  path: '/{name?}',  // put ? at end of parameter to make it optional
+  path: '/{name*2}',  // put ? at end of parameter to make it optional
   handler: (request, reply) => {
-    reply(`Hello ${encodeURIComponent(request.params.name)}!`)
+    const userParts = request.params.name.split('/');
+
+    reply(`Hell yeah ${encodeURIComponent(userParts[0])} ${encodeURIComponent(userParts[1])}!`)
   }
 });
 
