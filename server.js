@@ -22,12 +22,27 @@ server.route({
 // In order to do this, we use an asterisk and a number. For example:
 server.route({
   method: 'GET',
-  path: '/{name*2}',  // put ? at end of parameter to make it optional
+  path: '/{user*2}',  // put ? at end of parameter to make it optional
   handler: (request, reply) => {
-    const userParts = request.params.name.split('/');
+    const userParts = request.params.user.split('/');
 
     reply(`Hell yeah ${encodeURIComponent(userParts[0])} ${encodeURIComponent(userParts[1])}!`)
   }
+});
+
+// using config:
+server.route({
+    method: 'GET',
+    path: '/hello/{user}',
+    handler: (request, reply) => {
+        const user = request.params.user ? encodeURIComponent(request.params.user) : 'stranger';
+        reply('Hello ' + user + '!');
+    },
+    config: {
+        description: 'Say hello!',
+        notes: 'The user parameter defaults to \'stranger\' if unspecified',
+        tags: ['api', 'greeting']
+    }
 });
 
 // register inert plug-in
