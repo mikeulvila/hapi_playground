@@ -33,3 +33,30 @@ const validate = function(request, username, password, callback) {
   });
 
 };
+
+server.register(Basic, (err) => {
+
+  if (err) throw err;
+
+  server.auth.strategy('simple', 'basic', { validateFunc: validate });
+
+  server.route({
+    method: 'GET',
+    path: '/',
+    config: {
+      auth: 'simple',
+      handler: (request, reply) => {
+        reply(`Hello, ${request.auth.credentials.name}`);
+      }
+    }
+  });
+
+  server.start(err => {
+    if (err) throw err;
+    console.log(`Server running at: ${server.info.uri}`);
+  });
+
+});
+
+
+
